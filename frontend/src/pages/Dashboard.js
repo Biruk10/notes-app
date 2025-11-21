@@ -1,14 +1,12 @@
-// Dashboard page - displays all notes
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { notesAPI } from '../services/api';
-import Alert from '../components/Alert';
-
-const Dashboard = () => {
+// Dashboard page display 
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { notesAPI } from '../services/api'
+import Alert from '../components/Alert'
+  const Dashboard = () => {
   const [notes, setNotes] = useState([]);
   const [alert, setAlert] = useState({ type: '', message: '' });
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     fetchNotes();
   }, []);
@@ -26,12 +24,10 @@ const Dashboard = () => {
       setLoading(false);
     }
   };
-
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this note?')) {
       return;
     }
-
     try {
       await notesAPI.delete(id);
       setAlert({ type: 'success', message: 'Note deleted successfully!' });
@@ -43,7 +39,6 @@ const Dashboard = () => {
       });
     }
   };
-
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -53,7 +48,6 @@ const Dashboard = () => {
       minute: '2-digit'
     });
   };
-
   if (loading) {
     return (
       <div className="container mt-5 text-center">
@@ -63,7 +57,6 @@ const Dashboard = () => {
       </div>
     );
   }
-
   return (
     <div className="container mt-4">
       <div className="d-flex justify-content-between align-items-center mb-4">
@@ -72,13 +65,11 @@ const Dashboard = () => {
           + Create New Note
         </Link>
       </div>
-
       <Alert 
         type={alert.type} 
         message={alert.message} 
         onClose={() => setAlert({ type: '', message: '' })}
       />
-
       {notes.length === 0 ? (
         <div className="text-center mt-5">
           <p className="text-muted">No notes yet. Create your first note!</p>
@@ -120,5 +111,4 @@ const Dashboard = () => {
     </div>
   );
 };
-
 export default Dashboard;

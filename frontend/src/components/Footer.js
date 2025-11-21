@@ -1,9 +1,7 @@
-// Footer component
-import React from 'react';
 
+import React from 'react';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-
   return (
     <footer style={{
       background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
@@ -42,5 +40,4 @@ const Footer = () => {
     </footer>
   );
 };
-
 export default Footer;

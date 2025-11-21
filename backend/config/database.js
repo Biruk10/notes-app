@@ -1,7 +1,6 @@
 // Database configuration and connection
 const { Pool } = require('pg');
 require('dotenv').config();
-
 // Create PostgreSQL connection pool
 const pool = new Pool({
   host: process.env.DB_HOST,
@@ -10,12 +9,10 @@ const pool = new Pool({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
 });
-
 // Test database connection
 pool.on('connect', () => {
   console.log('✅ Connected to PostgreSQL database');
 });
-
 pool.on('error', (err) => {
   console.error('❌ Database connection error:', err.message);
   console.error('Check your .env file settings:');
@@ -24,7 +21,6 @@ pool.on('error', (err) => {
   console.error(`DB_USER: ${process.env.DB_USER}`);
   console.error(`DB_NAME: ${process.env.DB_NAME}`);
 });
-
 // Test connection on startup
 pool.query('SELECT NOW()', (err, res) => {
   if (err) {
@@ -34,5 +30,4 @@ pool.query('SELECT NOW()', (err, res) => {
     console.log('✅ Database connection verified at:', res.rows[0].now);
   }
 });
-
 module.exports = pool;

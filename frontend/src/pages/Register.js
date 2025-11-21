@@ -1,9 +1,9 @@
 // Register page component
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { authAPI } from '../services/api';
-import Alert from '../components/Alert';
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
+import { authAPI } from '../services/api'
+import Alert from '../components/Alert'
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -11,20 +11,20 @@ const Register = () => {
     email: '',
     password: '',
     confirmPassword: ''
-  });
-  const [alert, setAlert] = useState({ type: '', message: '' });
-  const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
-  const navigate = useNavigate();
+  })
+  const [alert, setAlert] = useState({ type: '', message: '' })
+  const [loading, setLoading] = useState(false)
+  const { login } = useAuth()
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value })
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setAlert({ type: '', message: '' });
+    setAlert({ type: '', message: '' })
 
     // Validate passwords match
     if (formData.password !== formData.confirmPassword) {
@@ -38,7 +38,7 @@ const Register = () => {
       const response = await authAPI.register(registerData);
       const { token, user } = response.data;
       
-      login(user, token);
+      login(user, token)
       setAlert({ type: 'success', message: 'Registration successful!' });
       
       setTimeout(() => navigate('/dashboard'), 1000);
@@ -48,7 +48,7 @@ const Register = () => {
         message: error.response?.data?.message || 'Registration failed.'
       });
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   };
 
@@ -132,7 +132,6 @@ const Register = () => {
         </div>
       </div>
     </div>
-  );
-};
-
+  )
+}
 export default Register;

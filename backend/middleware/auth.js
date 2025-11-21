@@ -1,13 +1,9 @@
 // JWT authentication middleware
 const jwt = require('jsonwebtoken');
 
-/**
- * Middleware to verify JWT token and protect routes
- * Extracts user ID from token and attaches to request object
- */
 const authMiddleware = (req, res, next) => {
   try {
-    // Get token from Authorization header
+    
     const token = req.headers.authorization?.split(' ')[1];
 
     if (!token) {
@@ -17,10 +13,8 @@ const authMiddleware = (req, res, next) => {
       });
     }
 
-    // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     
-    // Attach user ID to request object
     req.userId = decoded.userId;
     
     next();

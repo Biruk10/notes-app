@@ -1,23 +1,16 @@
-// Notes routes - CRUD operations for notes
+// Notes routes CRUD 
 const express = require('express');
 const router = express.Router();
 const pool = require('../config/database');
 const authMiddleware = require('../middleware/auth');
-
 // Apply authentication middleware to all routes
 router.use(authMiddleware);
-
-/**
- * GET /notes
- * Get all notes for the logged-in user
- */
 router.get('/', async (req, res) => {
   try {
     const result = await pool.query(
       'SELECT * FROM notes WHERE user_id = $1 ORDER BY created_at DESC',
       [req.userId]
     );
-
     res.json({
       success: true,
       notes: result.rows
@@ -30,15 +23,10 @@ router.get('/', async (req, res) => {
     });
   }
 });
-
-/**
- * POST /notes
- * Create a new note
- */
+//create a new note
 router.post('/', async (req, res) => {
   try {
     const { title, description } = req.body;
-
     // Validate input
     if (!title) {
       return res.status(400).json({ 
@@ -46,13 +34,11 @@ router.post('/', async (req, res) => {
         message: 'Title is required.' 
       });
     }
-
-    // Insert new note
+    // insert new note
     const result = await pool.query(
       'INSERT INTO notes (user_id, title, description) VALUES ($1, $2, $3) RETURNING *',
       [req.userId, title, description || '']
     );
-
     res.status(201).json({
       success: true,
       message: 'Note created successfully.',
@@ -66,16 +52,11 @@ router.post('/', async (req, res) => {
     });
   }
 });
-
-/**
- * PUT /notes/:id
- * Update an existing note
- */
+//update notes
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { title, description } = req.body;
-
     // Validate input
     if (!title) {
       return res.status(400).json({ 
@@ -83,26 +64,20 @@ router.put('/:id', async (req, res) => {
         message: 'Title is required.' 
       });
     }
-
-    // Check if note exists and belongs to user
     const noteCheck = await pool.query(
       'SELECT * FROM notes WHERE id = $1 AND user_id = $2',
       [id, req.userId]
     );
-
     if (noteCheck.rows.length === 0) {
       return res.status(404).json({ 
         success: false, 
         message: 'Note not found or unauthorized.' 
       });
     }
-
-    // Update note
     const result = await pool.query(
       'UPDATE notes SET title = $1, description = $2 WHERE id = $3 AND user_id = $4 RETURNING *',
       [title, description || '', id, req.userId]
     );
-
     res.json({
       success: true,
       message: 'Note updated successfully.',
@@ -116,11 +91,7 @@ router.put('/:id', async (req, res) => {
     });
   }
 });
-
-/**
- * DELETE /notes/:id
- * Delete a note
- */
+//delet
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -130,20 +101,17 @@ router.delete('/:id', async (req, res) => {
       'SELECT * FROM notes WHERE id = $1 AND user_id = $2',
       [id, req.userId]
     );
-
     if (noteCheck.rows.length === 0) {
       return res.status(404).json({ 
         success: false, 
         message: 'Note not found or unauthorized.' 
       });
     }
-
     // Delete note
     await pool.query(
       'DELETE FROM notes WHERE id = $1 AND user_id = $2',
       [id, req.userId]
     );
-
     res.json({
       success: true,
       message: 'Note deleted successfully.'
@@ -156,5 +124,4 @@ router.delete('/:id', async (req, res) => {
     });
   }
 });
-
 module.exports = router;

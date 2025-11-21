@@ -1,28 +1,28 @@
-// Login page component
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { authAPI } from '../services/api';
-import Alert from '../components/Alert';
+// Login 
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
+import { authAPI } from '../services/api'
+import Alert from '../components/Alert'
 
 const Login = () => {
-  const [formData, setFormData] = useState({ email: '', password: '' });
-  const [alert, setAlert] = useState({ type: '', message: '' });
-  const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
-  const navigate = useNavigate();
+  const [formData, setFormData] = useState({ email: '', password: '' })
+  const [alert, setAlert] = useState({ type: '', message: '' })
+  const [loading, setLoading] = useState(false)
+  const { login } = useAuth()
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setAlert({ type: '', message: '' });
+    e.preventDefault()
+    setLoading(true)
+    setAlert({ type: '', message: '' })
 
     try {
-      const response = await authAPI.login(formData);
+      const response = await authAPI.login(formData)
       const { token, user } = response.data;
       
       login(user, token);
@@ -97,5 +97,4 @@ const Login = () => {
     </div>
   );
 };
-
 export default Login;

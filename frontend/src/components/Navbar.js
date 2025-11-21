@@ -1,17 +1,14 @@
-// Navigation bar component
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-
+// Navigation-bar
+import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 const Navbar = () => {
   const { isAuthenticated, user, logout } = useAuth();
   const navigate = useNavigate();
-
   const handleLogout = () => {
     logout();
     navigate('/login');
   };
-
   return (
     <nav className="navbar navbar-expand-lg navbar-dark" style={{
       background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
@@ -104,5 +101,4 @@ const Navbar = () => {
     </nav>
   );
 };
-
 export default Navbar;

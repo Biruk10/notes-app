@@ -1,24 +1,22 @@
-// Edit note page component
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { notesAPI } from '../services/api';
-import Alert from '../components/Alert';
-
+// Edit note page
+import React, { useState, useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { notesAPI } from '../services/api'
+import Alert from '../components/Alert'
 const EditNote = () => {
   const [formData, setFormData] = useState({
     title: '',
     description: ''
   });
-  const [alert, setAlert] = useState({ type: '', message: '' });
-  const [loading, setLoading] = useState(false);
-  const [fetchLoading, setFetchLoading] = useState(true);
-  const navigate = useNavigate();
-  const { id } = useParams();
+  const [alert, setAlert] = useState({ type: '', message: '' })
+  const [loading, setLoading] = useState(false)
+  const [fetchLoading, setFetchLoading] = useState(true)
+  const navigate = useNavigate()
+  const { id } = useParams()
 
   useEffect(() => {
     fetchNote();
   }, [id]);
-
   const fetchNote = async () => {
     try {
       const response = await notesAPI.getAll();
@@ -42,16 +40,13 @@ const EditNote = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setAlert({ type: '', message: '' });
-
     try {
       await notesAPI.update(id, formData);
       setAlert({ type: 'success', message: 'Note updated successfully!' });
-      
       setTimeout(() => navigate('/dashboard'), 1000);
     } catch (error) {
       setAlert({
@@ -62,7 +57,6 @@ const EditNote = () => {
       setLoading(false);
     }
   };
-
   if (fetchLoading) {
     return (
       <div className="container mt-5 text-center">
@@ -72,7 +66,6 @@ const EditNote = () => {
       </div>
     );
   }
-
   return (
     <div className="container mt-4">
       <div className="row justify-content-center">
@@ -80,7 +73,6 @@ const EditNote = () => {
           <div className="card shadow">
             <div className="card-body p-4">
               <h2 className="mb-4">Edit Note</h2>
-              
               <Alert 
                 type={alert.type} 
                 message={alert.message} 
@@ -137,5 +129,4 @@ const EditNote = () => {
     </div>
   );
 };
-
 export default EditNote;

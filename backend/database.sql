@@ -1,7 +1,6 @@
--- Database setup script for Notes App
--- Run these commands in your PostgreSQL database
 
--- Create database (run this first)
+
+-- Create database
 CREATE DATABASE notes_app;
 
 -- Connect to the database
