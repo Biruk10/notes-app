@@ -1,0 +1,191 @@
+/* Global styles with yellow theme and Times New Roman font */
+body {
+  margin: 0;
+  font-family: 'Times New Roman', Times, serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #fff9e6 0%, #ffe680 100%);
+  min-height: 100vh;
+}
+
+* {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+code {
+  font-family: 'Courier New', monospace;
+}
+
+.min-vh-100 {
+  min-height: 100vh;
+}
+
+/* Custom yellow theme colors */
+:root {
+  --primary-yellow: #ffd700;
+  --dark-yellow: #e6c200;
+  --light-yellow: #fff9e6;
+  --accent-yellow: #ffed4e;
+  --text-dark: #333333;
+  --shadow-color: rgba(230, 194, 0, 0.3);
+}
+
+/* Note cards styling */
+.note-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+  background: linear-gradient(145deg, #ffffff, #fffef5);
+  border: 2px solid var(--primary-yellow);
+  border-radius: 12px;
+}
+
+.note-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px var(--shadow-color);
+  border-color: var(--dark-yellow);
+}
+
+.note-card .card-body {
+  background: #fffef5;
+}
+
+.note-card .card-footer {
+  background: var(--light-yellow) !important;
+  border-top: 2px solid var(--primary-yellow);
+}
+
+/* Button styling */
+.btn-primary {
+  background-color: var(--primary-yellow) !important;
+  border-color: var(--dark-yellow) !important;
+  color: var(--text-dark) !important;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: var(--dark-yellow) !important;
+  border-color: #ccaa00 !important;
+  transform: scale(1.05);
+}
+
+.btn-outline-primary {
+  color: var(--dark-yellow) !important;
+  border-color: var(--primary-yellow) !important;
+  font-weight: bold;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-yellow) !important;
+  border-color: var(--dark-yellow) !important;
+  color: var(--text-dark) !important;
+}
+
+.btn-outline-danger {
+  color: #dc3545 !important;
+  border-color: #dc3545 !important;
+  font-weight: bold;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545 !important;
+  color: white !important;
+}
+
+.btn-outline-light {
+  border-color: white !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+.btn-outline-light:hover {
+  background-color: white !important;
+  color: var(--text-dark) !important;
+}
+
+.btn-secondary {
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+  font-weight: bold;
+}
+
+.btn-group-sm .btn {
+  margin-left: 5px;
+}
+
+/* Card styling */
+.card {
+  border: 2px solid var(--primary-yellow);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  background: #fffef5;
+}
+
+.card-title {
+  color: var(--text-dark);
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.card-text {
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Form styling */
+.form-control {
+  border: 2px solid var(--primary-yellow);
+  border-radius: 8px;
+  font-family: 'Times New Roman', Times, serif;
+  padding: 10px;
+}
+
+.form-control:focus {
+  border-color: var(--dark-yellow);
+  box-shadow: 0 0 0 0.2rem var(--shadow-color);
+}
+
+.form-label {
+  font-weight: bold;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+/* Alert styling */
+.alert {
+  border-radius: 8px;
+  border: 2px solid;
+  font-weight: 500;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  border-color: #28a745;
+  color: #155724;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  border-color: #dc3545;
+  color: #721c24;
+}
+
+/* Container styling */
+.container {
+  background-color: transparent;
+}
+
+/* Text colors */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-dark);
+  font-weight: bold;
+}
+
+.text-muted {
+  color: #666 !important;
+}
+
+/* Spinner */
+.spinner-border {
+  color: var(--primary-yellow);
+  border-width: 3px;
+}
